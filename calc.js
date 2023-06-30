@@ -5,31 +5,27 @@ const botonClear = document.getElementsByName('data-clear')[0];
 
 var result = document.getElementById('result');
 var opeActual = '';
-var opeAnteior = '';
+var opeAnterior = '';
 var operacion = undefined;
 
 //TODO: agregamos los eventos de botones
 /**
  * Números
  */
-botonNumeros.forEach( function (boton){
-    boton.addEventListener('click', function(){
+botonNumeros.forEach( (boton) => {
+    boton.addEventListener('click',function(){
         agregarNumero(boton.innerText);
-        //alert(boton.innerText);
-    });
-});
+    })
+})
 
 /**
  * Operadores
  */
-
-botonOperadores.forEach( function(boton){
+botonOperadores.forEach( (boton) => {
     boton.addEventListener('click', function(){
         selectOperacion(boton.innerText);
-        //alert(boton.innerText);
-    });
-});
-
+    })
+})
 
 /**
  * Igual y limpiar
@@ -49,17 +45,50 @@ function agregarNumero(num){
     actualizarDisplay();
 };
 
+function selectOperacion(op){
+    if(opeActual ==='') return;
+    if(opeAnterior != '')
+        calcular();
+    operacion = op.toString()
+    opeAnterior = opeActual;
+    opeActual = '';
+};
+
 function actualizarDisplay(){
     result.value = opeActual;
 }
 
 function calcular(){
+    var calculo;
+    const anterior = parseFloat(opeAnterior);
+    const actual   = parseFloat(opeActual);
 
+    if(isNaN(anterior) || isNaN(actual)) return;
+
+    switch (operacion) {
+        case '+':
+            calculo = anterior + actual;        
+            break;
+        case '-':
+            calculo = anterior - actual;
+            break;
+        case '*':
+            calculo = anterior * actual;
+        case '/':
+            calculo = anterior / actual;
+        default:
+            return;
+            break;
+    }
+
+    opeActual = calculo;
+    operacion = undefined;
+    opeAnterior = '';
 };
 
 function limpiar(){
     opeActual = '';
-    opeAnteior = '';
+    opeAnterior = '';
     operacion = undefined;
 };
 

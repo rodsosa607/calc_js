@@ -2,15 +2,11 @@ const botonNumeros = document.getElementsByName('data-number');
 const botonOperadores = document.getElementsByName('data-operator');
 const botonEqual = document.getElementsByName('data-equal')[0];
 const botonClear = document.getElementsByName('data-clear')[0];
+
 var result = document.getElementById('result');
 var opeActual = '';
 var opeAnteior = '';
 var operacion = undefined;
-
-// console.log(botonNumeros);
-// console.log(botonOperadores);
-// console.log(botonResultado);
-// console.log(botonClear);
 
 //TODO: agregamos los eventos de botones
 /**
@@ -27,7 +23,7 @@ botonNumeros.forEach( function (boton){
  * Operadores
  */
 
-botonOperadores.forEach( function (boton){
+botonOperadores.forEach( function(boton){
     boton.addEventListener('click', function(){
         selectOperacion(boton.innerText);
         //alert(boton.innerText);
@@ -38,12 +34,12 @@ botonOperadores.forEach( function (boton){
 /**
  * Igual y limpiar
  */
-botonEqual.addEventListener('click', function (){
+botonEqual.addEventListener('click', function(){
     calcular();
     actualizarDisplay();
 });
 
-botonClear.addEventListener('click', function (){
+botonClear.addEventListener('click', function(){
     limpiar();
     actualizarDisplay();
 });
@@ -54,5 +50,17 @@ function agregarNumero(num){
 };
 
 function actualizarDisplay(){
-    result = opeActual;
+    result.value = opeActual;
 }
+
+function calcular(){
+
+};
+
+function limpiar(){
+    opeActual = '';
+    opeAnteior = '';
+    operacion = undefined;
+};
+
+limpiar();

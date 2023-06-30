@@ -3,6 +3,9 @@ const botonOperadores = document.getElementsByName('data-operator');
 const botonEqual = document.getElementsByName('data-equal')[0];
 const botonClear = document.getElementsByName('data-clear')[0];
 
+//console.log(botonOperadores);
+
+
 var result = document.getElementById('result');
 var opeActual = '';
 var opeAnterior = '';
@@ -47,8 +50,10 @@ function agregarNumero(num){
 
 function selectOperacion(op){
     if(opeActual ==='') return;
-    if(opeAnterior != '')
+
+    if(opeAnterior !== '')
         calcular();
+
     operacion = op.toString()
     opeAnterior = opeActual;
     opeActual = '';
@@ -74,11 +79,12 @@ function calcular(){
             break;
         case '*':
             calculo = anterior * actual;
+            break;
         case '/':
             calculo = anterior / actual;
+            break;
         default:
             return;
-            break;
     }
 
     opeActual = calculo;
